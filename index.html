@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#183b64">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Budget CHF">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="style.css">
+  <title>Budget CHF</title>
+</head>
+<body>
+  <main>
+    <header><div><p class="eyebrow">DEIN BUDGET</p><h1 id="monthTitle"></h1></div><button id="settingsButton" class="icon" aria-label="Einstellungen">⚙</button></header>
+    <section class="balance"><p>Verfügbar diesen Monat</p><strong id="available">CHF 0</strong><span id="incomeHint"></span></section>
+    <section class="stats" aria-label="Monatsübersicht">
+      <article><span>Ausgaben</span><b id="expenses">CHF 0</b><small id="expenseBudget">von CHF 0</small></article>
+      <article><span>Gespart</span><b id="saved">CHF 0</b><small id="savingTarget">Ziel CHF 0</small></article>
+    </section>
+    <section class="section"><div class="sectionTitle"><h2>Letzte Einträge</h2><button id="allButton" class="link">Alle anzeigen</button></div><div id="entries" class="entries"></div></section>
+  </main>
+  <nav><button class="nav active" data-screen="home">Übersicht</button><button id="addButton" class="add">＋</button><button class="nav" data-screen="analysis">Auswertung</button></nav>
+
+  <dialog id="entryDialog"><form method="dialog" id="entryForm"><div class="modalHeader"><h2>Eintrag erfassen</h2><button value="cancel" class="close">×</button></div>
+    <label>Betrag<input id="amount" inputmode="decimal" placeholder="0.00" required></label>
+    <label>Art<select id="type"><option value="expense">Ausgabe</option><option value="saving">Sparen</option></select></label>
+    <label>Kategorie<select id="category"></select></label>
+    <label>Datum<input id="date" type="date" required></label>
+    <label>Notiz <span class="optional">optional</span><input id="note" maxlength="70" placeholder="z. B. Migros"></label>
+    <button class="primary" value="submit">Speichern</button>
+  </form></dialog>
+
+  <dialog id="settingsDialog"><form method="dialog" id="settingsForm"><div class="modalHeader"><h2>Einstellungen</h2><button value="cancel" class="close">×</button></div>
+    <p class="help">Die Monatswerte entsprechen deiner Excel-Budgetdatei. Änderungen gelten nur für die App.</p>
+    <div id="budgetFields"></div>
+    <button class="primary" value="submit">Budget speichern</button>
+    <hr><h3>Daten sichern</h3><div class="actions"><button type="button" id="exportButton">Exportieren</button><label class="fileButton">Importieren<input id="importFile" type="file" accept="application/json"></label></div>
+  </form></dialog>
+
+  <dialog id="listDialog"><form method="dialog"><div class="modalHeader"><h2>Alle Einträge</h2><button value="cancel" class="close">×</button></div><div id="allEntries" class="entries"></div></form></dialog>
+  <section id="analysisScreen" hidden><header><div><p class="eyebrow">AUSWERTUNG</p><h1>Monatsbudget</h1></div></header><div id="categoryAnalysis" class="analysis"></div><section class="section"><h2>Jahresfortschritt</h2><div id="yearAnalysis" class="year"></div></section></section>
+  <script src="app.js"></script>
+</body>
+</html>
